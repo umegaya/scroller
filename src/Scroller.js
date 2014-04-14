@@ -12,6 +12,7 @@
  * License: MIT + Apache (V2)
  */
 
+var core = require('./animate');
 var Scroller;
 
 (function() {
@@ -1348,4 +1349,5 @@ var Scroller;
 		Scroller.prototype[key] = members[key];
 	}
 
+	module.exports = Scroller;
 })();

@@ -32,12 +32,9 @@
 	var counter = 1;
 
 	// Create namespaces
-	if (!global.core) {
-		global.core = { effect : {} };
-
-	} else if (!core.effect) {
-		core.effect = {};
-	}
+	var core = {
+		effect: {}
+	};
 
 	core.effect.Animate = {
 
@@ -235,5 +232,8 @@
 			return id;
 		}
 	};
+
+	module.exports = core;
+
 })(this);
 
