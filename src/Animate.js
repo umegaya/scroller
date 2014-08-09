@@ -235,5 +235,5 @@
 
 	module.exports = core;
 
-})(this);
+})(typeof window !== 'undefined' ? window : this);
 
