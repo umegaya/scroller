@@ -34,6 +34,7 @@ These are the available options with their defaults. Options can be modified usi
 * scrollingY = `true`
 * animating = `true`
 * animationDuration = `250`
+* decelerationRate = `0.95`
 * bouncing = `true`
 * locking = `true`
 * paging = `false`

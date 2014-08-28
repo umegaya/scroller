@@ -67,6 +67,9 @@ var Scroller;
 				provided that another scrolling action has not begun. Used to know
 				when to fade out a scrollbar. */
 			scrollingComplete: NOOP,
+
+			/** Increase or decrease the amount of friction applied to deceleration **/
+			decelerationRate: 0.95,
 			
 			/** This configures the amount of change applied to deceleration when reaching boundaries  **/
             penetrationDeceleration : 0.03,
@@ -1290,7 +1293,7 @@ var Scroller;
 				// This is the factor applied to every iteration of the animation
 				// to slow down the process. This should emulate natural behavior where
 				// objects slow down when the initiator of the movement is removed
-				var frictionFactor = 0.95;
+				var frictionFactor = self.options.decelerationRate;
 
 				self.__decelerationVelocityX *= frictionFactor;
 				self.__decelerationVelocityY *= frictionFactor;
