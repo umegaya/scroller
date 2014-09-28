@@ -12,7 +12,7 @@
  * License: MIT + Apache (V2)
  */
 
-var core = require('./animate');
+var core = require('./Animate');
 var Scroller;
 
 (function() {
