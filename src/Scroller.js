@@ -961,6 +961,14 @@ var Scroller;
 						startPos = i;
 					}
 
+					// If we haven't received consecutive touchmove events within a 100ms
+					// timeframe, attempt a best-effort based on the first position. This
+					// typically happens when an expensive operation occurs on the main
+					// thread during scrolling, such as image decoding.
+					if (startPos === endPos && positions.length > 5) {
+						startPos = 2;
+					}
+
 					// If start and stop position is identical in a 100ms timeframe,
 					// we cannot compute any useful deceleration.
 					if (startPos !== endPos) {
