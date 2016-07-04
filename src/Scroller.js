@@ -149,6 +149,11 @@ var Scroller;
 		 */
 		__isAnimating: false,
 
+		/**
+		 * {Boolean} does doTouchStart start with scrollTop == 0?
+		 */
+		__startWithZeroTop: false,
+
 
 
 		/*
@@ -726,6 +731,8 @@ var Scroller;
 			// Clearing data structure
 			self.__positions = [];
 
+			// reset startWithZeroTop flag.
+			self.__startWithZeroTop = self.__scrollTop == 0;
 		},
 
 
@@ -837,7 +844,7 @@ var Scroller;
 					scrollTop -= moveY * this.options.speedMultiplier;
 					var maxScrollTop = self.__maxScrollTop;
 
-					if (scrollTop > maxScrollTop || scrollTop < 0) {
+					if (scrollTop > maxScrollTop || scrollTop <= 0) {
 
 						// Slow down on the edges
 						if (self.options.bouncing) {
@@ -846,6 +853,14 @@ var Scroller;
 
 							// Support pull-to-refresh (only when only y is scrollable)
 							if (!self.__enableScrollX && self.__refreshHeight != null) {
+								if (scrollTop < 0) {
+									//only when start with zero scrollTop, can be activate pull to refresh
+									if (!self.__startWithZeroTop) {
+										scrollTop = Math.max(scrollTop, -self.__refreshHeight / 2);
+									} else {
+										scrollTop = Math.max(scrollTop, -self.__refreshHeight);
+									}
+								}
 
 								if (!self.__refreshActive && scrollTop <= -self.__refreshHeight) {
 
@@ -1362,3 +1377,4 @@ var Scroller;
 
 	module.exports = Scroller;
 })();
+
